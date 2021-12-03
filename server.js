@@ -59,8 +59,6 @@ app.use(express.static(path.join(__dirname, 'images', 'build')));
 
 
 app.post('/add', upload.single('photo'), async (req, res) => {
-	debugger
-	console.log('hello')
 	const name = req.body.name;
 	const category = req.body.category;
 	const photo = req.body.photo
@@ -76,7 +74,6 @@ app.post('/add', upload.single('photo'), async (req, res) => {
 		description,
 
 	});
-	console.log(newUser, "././././.")
 	const savedUser = await newUser.save();
 	res.json({ msg: savedUser })
 
@@ -92,7 +89,6 @@ app.get('/getData', async (req, res) => {
 
 app.put('/editbook/:id', async (req, res) => {
 	const id = req.params.id;
-	console.log(id)
 
 	const book = await userBook.findById(id);
 	if (book) {
@@ -104,7 +100,6 @@ app.put('/editbook/:id', async (req, res) => {
 		book.stock = req.body.stock || book.stock
 
 		const updatedbook = await book.save();
-		console.log(updatedbook, "./././.")
 		res.json({
 			_id: updatedbook._id,
 			name: updatedbook.name,
